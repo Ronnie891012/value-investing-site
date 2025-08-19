@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Value Investing Toolkit</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-YS7V1fVML1jS2s7Xf+5mr7h4j+q4w+qkstJZxKwxm0Xj08MLK/66efNh0e9qE0aZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Value Investing Toolkit</a>
+      </div>
+    </nav>
+    <div class="container my-4">
+      <div class="row mb-3">
+        <div class="col-md-3 mb-2">
+          <input
+            type="text"
+            id="tickerInput"
+            class="form-control"
+            placeholder="Ticker symbol (e.g., AAPL)"
+          />
+        </div>
+        <div class="col-md-3 mb-2">
+          <input
+            type="text"
+            id="apiKeyInput"
+            class="form-control"
+            placeholder="Alpha Vantage API key"
+          />
+        </div>
+        <div class="col-md-2 mb-2">
+          <button id="searchBtn" class="btn btn-primary w-100">Fetch Data</button>
+        </div>
+      </div>
+      <div id="alertBox" class="alert alert-warning d-none" role="alert"></div>
+      <div id="results" class="d-none">
+        <h3>Current Data for <span id="resultTicker"></span></h3>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Current Price
+            <span id="currentPrice" class="badge bg-primary"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            EPS (Trailing 12M)
+            <span id="eps" class="badge bg-primary"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            5‑Year EPS CAGR
+            <span id="growthRate" class="badge bg-primary"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            PEG Ratio
+            <span id="pegRatio" class="badge bg-primary"></span>
+          </li>
+        </ul>
+        <h4>Intrinsic Value Estimates</h4>
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Peter Lynch Fair Value</h5>
+                <p class="card-text">
+                  <strong id="lynchValue"></strong>
+                </p>
+                <p class="card-text" style="font-size: 0.8rem;">
+                  Calculated as PEG × 5‑year growth rate × EPS (based on the
+                  formula referenced from GuruFocus【455567150017608†L1-L8】).
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Benjamin Graham (Original)</h5>
+                <p class="card-text">
+                  <strong id="grahamOriginal"></strong>
+                </p>
+                <p class="card-text" style="font-size: 0.8rem;">
+                  Intrinsic value = EPS × (8.5 + 2g) where g is the expected
+                  growth rate over 7–10 years【445853112012613†L145-L156】.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Benjamin Graham (Revised)</h5>
+                <p class="card-text">
+                  <strong id="grahamRevised"></strong>
+                </p>
+                <p class="card-text" style="font-size: 0.8rem;">
+                  Revised intrinsic value = EPS × (8.5 + 2g) × 4.4 ÷ Y where Y is
+                  the current AAA corporate bond yield【445853112012613†L170-L184】.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Buffett DCF Value</h5>
+                <p class="card-text">
+                  <strong id="dcfValue"></strong>
+                </p>
+                <p class="card-text" style="font-size: 0.8rem;">
+                  Present value of future cash flows discounted at a selected
+                  rate. DCF sums each year’s cash flow divided by (1 + r)^n【553667308798765†L404-L414】.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-2XbU3w+0cQQeuk15VTYCnfgOfMAZIa3eCMfOEt9jdqv3zS+KUnMOo8ulOr8IoY8Y" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
